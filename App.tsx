@@ -9,7 +9,8 @@ import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import { ThemeProvider } from "styled-components"
 import { getCurrentTheme } from './Theme';
-import { useFonts } from 'expo-font';
+import { useFonts } from 'expo-font'
+import { authorize } from 'react-native-app-auth'
 
 const API_URL = 'https://api-sigma-invest.herokuapp.com'
 //const API_URL = 'https://localhost:5001'
@@ -34,9 +35,42 @@ const client = new ApolloClient({
 
 const theme = getCurrentTheme()
 
+// const config = {
+//     response_type: 'code',
+//     scope: 'openid profile Sigma.Api',
+//     client_id: 'sigma_mobile',
+//     acr_values: 'http://oidc.contact.de',
+//     acr: 'default',
+//     authority: 'https://auth.badeev.info',
+//     browser_type: 'default',
+//     redirect_uri: "https://com.verify",
+// };
+
+const config = {
+    issuer: 'https://auth.badeev.info',
+    clientId: 'sigma_mobile',
+    redirectUrl: 'https://com.verify',
+    scopes: ['openid', 'profile', 'Sigma.Api', 'offline_access']
+  };
+
 export default function App() {
     const isLoadingComplete = useCachedResources();
     const colorScheme = useColorScheme();
+
+    // useEffect(() => {
+    //     auth()
+    // }, [])
+
+    // const auth = async () => {
+    //     try {
+    //         const authState = await authorize(config);
+    //         console.log(authState);
+    //         return authState
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+        
+    // }
 
     const [loaded] = useFonts({
         'antoutline': require('@ant-design/icons-react-native/fonts/antoutline.ttf'),

@@ -25,7 +25,15 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "intentFilters": [{
+        "action": "VIEW",
+        "data": {
+          "scheme": "https",
+          "host": "com.verify"
+        },
+        "category": ["BROWSABLE", "DEFAULT"]
+      }]
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

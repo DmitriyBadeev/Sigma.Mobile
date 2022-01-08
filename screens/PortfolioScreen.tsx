@@ -11,10 +11,14 @@ export default function PortfolioScreen({ navigation }: RootTabScreenProps<'Port
   const { data, loading } = usePortfoliosQuery()
   const [activePortfolioIds, setActivePortfolioIds] = useState<string[]>([])
 
-  useEffect(() => {
-    const portfolios = data?.portfolios || []
+  const portfolios = data?.portfolios?.map<PortfolioInfoType>(portfolio => ({
+    id: portfolio?.id,
+    name: portfolio?.name || '',
+    iconUrl: portfolio?.portfolioType?.iconUrl || '',
+  })) || []
 
-    const firstPortfolioId = [...portfolios].pop()?.id
+  useEffect(() => {
+    const firstPortfolioId = [...portfolios].sort((a, b) => a.name > b.name ? 1 : -1).shift()?.id
 
     if (firstPortfolioId) {
       setActivePortfolioIds(prev => [...prev, firstPortfolioId])
@@ -22,12 +26,6 @@ export default function PortfolioScreen({ navigation }: RootTabScreenProps<'Port
   }, [data])
 
   if (loading) return <ActivityIndicator size='large' />
-
-  const portfolios = data?.portfolios?.map<PortfolioInfoType>(portfolio => ({
-    id: portfolio?.id,
-    name: portfolio?.name || '',
-    iconUrl: portfolio?.portfolioType?.iconUrl || '',
-  })) || []
 
   const togglePortfolio = (id: string) => {
     if (activePortfolioIds.includes(id)) {
