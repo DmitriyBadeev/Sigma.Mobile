@@ -1,0 +1,12 @@
+schema: https://api-sigma-invest.herokuapp.com/graphql
+documents: ./**/*.graphql
+generates:
+    ./graphql-types.tsx:
+        config:
+            withHooks: true
+            withComponent: false
+            withHOC: false
+        plugins:
+            - typescript
+            - typescript-operations
+            - typescript-react-apollo

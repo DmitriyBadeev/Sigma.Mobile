@@ -6,6 +6,8 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import 'styled-components';
+import { getCurrentTheme } from './Theme'
 
 declare global {
   namespace ReactNavigation {
@@ -25,7 +27,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 >;
 
 export type RootTabParamList = {
-  TabOne: undefined;
+  PortfolioScreen: undefined;
   TabTwo: undefined;
 };
 
@@ -33,3 +35,7 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
   BottomTabScreenProps<RootTabParamList, Screen>,
   NativeStackScreenProps<RootStackParamList>
 >;
+
+declare module 'styled-components' {
+  export interface DefaultTheme extends ReturnType<typeof getCurrentTheme> {}
+}

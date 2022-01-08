@@ -1,0 +1,102 @@
+query aggregatePortfolios($portfolioIds: [UUID!]) {
+  aggregatePortfolios(portfolioIds: $portfolioIds) {
+    isSuccess
+    message
+    result {
+      cost
+      investedSum
+      paperProfit
+      paperProfitPercent
+      rubBalance
+      dollarBalance
+      euroBalance
+      dividendProfit
+      dividendProfitPercent
+
+      portfolioStocks {
+        stock {
+          ticket
+          shortName
+          price
+          priceChange
+          updateTime
+        }
+        id
+        amount
+        cost
+        boughtPrice
+        paperProfit
+        paperProfitPercent
+      }
+      portfolioFonds {
+        fond {
+          ticket
+          shortName
+          price
+          priceChange
+          updateTime
+        }
+        id
+        amount
+        cost
+        boughtPrice
+        paperProfit
+        paperProfitPercent
+      }
+      portfolioBonds {
+        bond {
+          ticket
+          percent
+          percentChange
+          price
+          amortizationDate
+          coupon
+          nominal
+          shortName
+          updateTime
+        }
+        id
+        cost
+        amount
+        boughtPrice
+        paperProfit
+        paperProfitPercent
+      }
+    }
+  }
+}
+
+query herfindahlHirschmanIndex($portfolioIds: [UUID!]) {
+  herfindahlHirschmanIndex(portfolioIds: $portfolioIds) {
+    isSuccess
+    message
+    result {
+      value
+      interpretation
+    }
+  }
+}
+
+query sharpeRatio($portfolioIds: [UUID!]) {  
+  sharpeRatio(portfolioIds: $portfolioIds) {
+    isSuccess
+    message
+    result {
+      value
+      risk
+      profit
+      safeRate
+      interpretation
+    }
+  }
+}
+
+query portfolios {
+    portfolios {
+        id
+        name
+        portfolioType {
+            iconUrl
+        }
+    }
+}

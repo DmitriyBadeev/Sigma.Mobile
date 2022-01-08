@@ -1,4 +1,8 @@
-const tintColorLight = '#2f95dc';
+import { getCurrentTheme } from "../Theme";
+
+const theme = getCurrentTheme()
+
+const tintColorLight = theme.primary;
 const tintColorDark = '#fff';
 
 export default {

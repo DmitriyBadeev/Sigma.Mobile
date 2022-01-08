@@ -75,5 +75,6 @@ const styles = StyleSheet.create({
   },
   helpLinkText: {
     textAlign: 'center',
+    fontSize: 17
   },
 });
